@@ -1,12 +1,14 @@
-import os
 import json
+import os
 
 from dotenv import load_dotenv
 from google import genai
 
 load_dotenv()
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+client = genai.Client(
+    api_key=os.getenv("GEMINI_API_KEY")
+)
 
 
 def check_reliability(
@@ -16,41 +18,38 @@ def check_reliability(
 ):
 
     prompt = f"""
-You are a business research and data reliability assistant.
-
-Two sources provide information about the same company.
+You are evaluating conflicting information about a company.
 
 Company:
 {company}
 
-SOURCE A:
+Source A:
 {source_a}
 
-SOURCE B:
+Source B:
 {source_b}
 
-Compare the sources and determine which information should be
-used for business decision-making.
+Determine:
 
-Return ONLY valid JSON in exactly this structure:
+1. Which source should be preferred?
+2. Why?
+3. What uncertainty remains?
+
+Return ONLY valid JSON in this format:
 
 {{
     "company": "{company}",
-    "conflict_detected": true,
     "preferred_source": "Source A",
-    "reason": "Why this source is more reliable",
-    "selected_information": "The information that should be used",
-    "uncertainty": "What is still uncertain or needs verification"
+    "reason": "Explain why this source is more reliable.",
+    "uncertainty": "Explain any remaining uncertainty."
 }}
 
 Rules:
-- conflict_detected must be true or false.
-- preferred_source must be Source A, Source B, or "Both".
 - Do not invent facts.
-- Prefer direct company information over unsupported third-party claims.
-- Clearly communicate uncertainty.
-- Keep the response concise.
-- Return JSON only.
+- Compare the information based only on the provided sources.
+- Clearly explain the reason for choosing a source.
+- Mention uncertainty when the evidence is insufficient.
+- Return valid JSON only.
 """
 
     response = client.models.generate_content(
@@ -60,7 +59,18 @@ Rules:
 
     text = response.text.strip()
 
-    if text.startswith("```"):
-        text = text.replace("```json", "").replace("```", "").strip()
+    if text.startswith("```json"):
+        text = text[7:]
 
-    return json.loads(text)
+    if text.endswith("```"):
+        text = text[:-3]
+
+    try:
+        return json.loads(text.strip())
+
+    except json.JSONDecodeError:
+
+        return {
+            "error": "The AI returned invalid JSON.",
+            "raw_response": text
+        }

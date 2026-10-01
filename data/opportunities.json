@@ -22,19 +22,19 @@
     },
     {
         "company_name": "Freshworks",
-        "summary": "Freshworks provides business software solutions, but specific details from the website are currently unavailable due to automated access blocking.",
+        "summary": "Freshworks provides business software solutions including customer engagement and IT service management tools. The provided website research was blocked, limiting direct analysis from the site.",
         "signals": [
-            "Website automated access is blocked",
-            "Company domain is known as Freshworks",
-            "No specific recent business signals or product updates available from the provided text"
+            "Website research was blocked preventing automated access",
+            "Company operates in the business software and SaaS domain based on general market awareness",
+            "No specific current product or operational signals available due to missing data"
         ],
-        "score": 15,
-        "score_reason": "Business signal (5/25): Minimal signal due to lack of accessible data. Potential opportunity (5/25): Unknown without website insights. Technology/product fit (0/20): Unclear product fit without current information. Evidence quality (0/15): Highly limited as automated access was blocked and no research text was provided. Actionability today (5/15): Very low due to complete lack of verifiable current data.",
+        "score": 25,
+        "score_reason": "Business signal: 5/25 (limited by lack of data). Potential opportunity: 10/25 (software market potential exists, but unverified). Technology/product fit: 5/20 (unknown based on provided text). Evidence quality: 0/15 (research was blocked and information is missing). Actionability today: 5/15 (low actionability without data). Total score: 25.",
         "priority": "Low",
-        "recommended_persona": "Head of IT or IT Procurement",
-        "persona_reason": "Relevant for software evaluation, but difficult to target effectively without specific company insights.",
-        "recommended_action": "Manually review the website or use alternative external intelligence sources to gather company details before outreach.",
-        "uncertainty": "The website blocked automated access, resulting in a complete lack of current company, product, and market positioning information.",
+        "recommended_persona": "Head of IT Procurement",
+        "persona_reason": "Relevant for evaluating enterprise software and technology stack integrations.",
+        "recommended_action": "Conduct manual research or utilize alternative data sources to gather verified company details before outreach.",
+        "uncertainty": "The website blocked automated access, resulting in a complete lack of current company-specific data, product details, and strategic priorities.",
         "website": "https://www.freshworks.com"
     },
     {
